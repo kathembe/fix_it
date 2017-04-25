@@ -1,0 +1,23 @@
+<%= @fundi.first_name%>
+<%= @fundi.surname%>
+<%= @fundi.location%>
+<%= @fundi.contacts%>
+<%= @fundi.about%>
+
+<% if @fundi.reviews.any? %>
+
+    <ul>
+      <% @fundi.reviews.each do |review| %>
+        <li>
+
+          <%= review.comment%> ~<%= review.name%>
+
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>There are no reviews yet!</p>
+  <% end %>
+
+  <%= link_to "New review", new_fundi_review_path(@fundi) %>
+  <p><%= link_to "Home", fundis_path %></p>
