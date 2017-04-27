@@ -14,6 +14,11 @@
           <%= fundi.contacts%>
 
         </li>
+        <%= link_to "Edit profile", edit_skill_fundi_path(@skill, fundi)%>
+        <%= link_to "Delete profile", skill_fundi_path(@skill, fundi),
+                             :data => {:confirm => "You sure?",
+                                       :method => "delete"} %>
+
       <% end %>
     </ul>
   <% else %>
