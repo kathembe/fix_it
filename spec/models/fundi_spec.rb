@@ -7,5 +7,6 @@ require 'rails_helper'
     it { should validate_presence_of :contacts }
     it { should validate_presence_of :about }
     it { should belong_to :skill }
+    it { should belong_to :user }
     it { should have_many :reviews }
   end
