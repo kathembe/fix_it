@@ -1,0 +1,9 @@
+<h1>Category</h1>
+ <%= link_to "New Category", new_skill_path %>
+
+  <ul>
+    <% @skills.each do |skill| %>
+      <li><%= link_to skill.name, skill_path(skill) %></li>
+    
+    <% end %>
+  </ul>
