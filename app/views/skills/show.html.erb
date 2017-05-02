@@ -1,29 +1,64 @@
-<h1>Fundis for <%= @skill.name %> Category</h1>
-<p><%= link_to "Edit", edit_skill_path(@skill) %></p>
-<p><%= link_to "Delete", skill_path(@skill),
-                     :data => {:confirm => "You sure?",
-                               :method => "delete"} %></p>
+<nav id="nav-top" class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "FixIt", skills_path, :class => "head-fix"%>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right sign">
+        <%if !user_signed_in?%>
+          <li class="active">
+            <%= link_to "SignUp", new_user_registration_path%>
+          </li>
+          <li>
+            <%= link_to "LogIn", new_user_session_path%>
+          </li>
+        <%end%>
+        <%if user_signed_in?%>
+          <li>
+            <%= link_to "logout", destroy_user_session_path, :method => :delete%>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h1 class="gstyle text-center">'<%= @skill.name %>' Category</h1>
+<div class="container">
+  <p><%= link_to "Edit Category", edit_skill_path(@skill), :class => "btn btn-primary fundi-btn" %></p>
+  <p><%= link_to "Delete Category", skill_path(@skill), :class => "btn btn-primary fundi-btn" ,
+                       :data => {:confirm => "You sure?",
+                                 :method => "delete"} %></p>
+</div>
 
+
+
+<div class="container">
 <% if @skill.fundis.any? %>
-
     <ul>
       <% @skill.fundis.each do |fundi| %>
-        <li>
-          <%= link_to fundi.first_name, fundi_path(fundi) %>
-          <%= fundi.location%>
-          <%= fundi.contacts%>
-
-        </li>
+        <div class="thumbnail col-md-10 thumb-fundi">
+          <%= link_to fundi.first_name, fundi_path(fundi), :class => "fundi-name" %><br>
+          <%= fundi.location%><br>
+          <%= fundi.contacts%><br>
         <%= link_to "Edit profile", edit_skill_fundi_path(@skill, fundi)%>
         <%= link_to "Delete profile", skill_fundi_path(@skill, fundi),
                              :data => {:confirm => "You sure?",
                                        :method => "delete"} %>
-
+        </div>
       <% end %>
     </ul>
-  <% else %>
-    <p>There are no fundis yet!</p>
-  <% end %>
+<% else %>
+<p>There are no fundis yet!</p>
+<% end %>
+</div>
 
-  <%= link_to "New fundi", new_skill_fundi_path(@skill) %>
-  <p><%= link_to "Home", skills_path %></p>
+  <br>
+  <div class="container">
+    <%= link_to "New fundi", new_skill_fundi_path(@skill), :class => "btn btn-primary fundi-btn" %>
+  </div>
