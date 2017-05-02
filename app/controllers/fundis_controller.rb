@@ -1,4 +1,5 @@
 class FundisController < ApplicationController
+  before_action :find_fundi, only: [:show, :destroy, :create, :upvote, :downvote]
   def new
     @skill = Skill.find(params[:skill_id])
     @fundi = @skill.fundis.new
@@ -30,6 +31,14 @@ class FundisController < ApplicationController
          render :edit
        end
      end
+     def upvote
+       @fundi.upvote_by current_user
+       redirect_to :back
+     end
+     def downvote
+       @fundi.downvote_by current_user
+       redirect_to :back
+     end
      def destroy
        @skill = Skill.find(params[:skill_id])
        @fundi = @skill.fundis.find(params[:id])
@@ -40,4 +49,7 @@ class FundisController < ApplicationController
     def fundi_params
       params.require(:fundi).permit(:first_name, :surname, :location, :contacts, :about)
     end
+    def find_fundi
+    @fundi = Fundi.find(params[:id])
+  end
   end

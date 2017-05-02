@@ -36,7 +36,16 @@
   <%= @fundi.about%><br>
 </div><hr>
 
-<h2 class="gstyle text-center">Review <%= @fundi.surname%>'s work</h2>
+<%= link_to like_fundi_path(@fundi), method: :put, class: "btn btn-primary" do%>
+    <span>Like</span>
+    <span class="badge"><%=@fundi.get_upvotes.size%></span>
+  <%end%>
+  <%= link_to unlike_fundi_path(@fundi), method: :put, class: "btn btn-primary" do%>
+      <span>Dislike</span>
+      <span class="badge"><%=@fundi.get_downvotes.size%></span>
+    <%end%>
+
+  <h2 class="gstyle text-center">Review <%= @fundi.surname%>'s work</h2>
   <%= link_to "New review", new_fundi_review_path(@fundi), :class => "btn btn-primary fundi-btn" %><br><br>
 <div class="reviews container col-md-10">
   <% if @fundi.reviews.any? %>
