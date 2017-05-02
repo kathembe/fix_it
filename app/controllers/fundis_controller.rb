@@ -1,15 +1,15 @@
 class FundisController < ApplicationController
+  def new
+    @skill = Skill.find(params[:skill_id])
+    @fundi = @skill.fundis.new
+  end
     def show
      @fundi = Fundi.find(params[:id])
      render :show
    end
-   def new
-     @skill = Skill.find(params[:skill_id])
-     @fundi = current_user.fundis.build
-   end
     def create
       @skill = Skill.find(params[:skill_id])
-      @fundi = current_user.fundis.build(fundi_params)
+      @fundi = @skill.fundis.new(fundi_params)
       if @fundi.save
         redirect_to skill_path(@fundi.skill)
       else
