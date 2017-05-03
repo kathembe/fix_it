@@ -30,12 +30,14 @@
 </nav>
 <h1 class="gstyle text-center">'<%= @skill.name %>' Category</h1>
 <div class="container">
+  <%if @skill.user == current_user %>
   <p><%= link_to "Edit Category", edit_skill_path(@skill), :class => "btn btn-primary fundi-btn" %></p>
   <p><%= link_to "Delete Category", skill_path(@skill), :class => "btn btn-primary fundi-btn" ,
                        :data => {:confirm => "You sure?",
                                  :method => "delete"} %></p>
-</div>
+              <%end%>
 
+</div>
 
 
 <div class="container">
@@ -47,10 +49,12 @@
           <%= link_to fundi.first_name, fundi_path(fundi), :class => "fundi-name" %><br>
           <%= fundi.location%><br>
           <%= fundi.contacts%><br>
+          <%if fundi.user == current_user %>
         <%= link_to "Edit profile", edit_skill_fundi_path(@skill, fundi)%>
         <%= link_to "Delete profile", skill_fundi_path(@skill, fundi),
                              :data => {:confirm => "You sure?",
                                        :method => "delete"} %>
+                                       <%end%>
         </div>
       <% end %>
     </ul>

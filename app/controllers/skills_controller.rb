@@ -7,6 +7,18 @@ class SkillsController < ApplicationController
      @skill = Skill.find(params[:id])
      render :show
    end
+   def new
+     @skill = current_user.skill.build
+     render :new
+   end
+   def create
+     @skill = current_user.skill.build(skill_params)
+     if @skill.save
+       redirect_to  skills_path
+     else
+       render :new
+     end
+   end
    def edit
       @skill = Skill.find(params[:id])
       render :edit
@@ -24,18 +36,7 @@ class SkillsController < ApplicationController
       @skill.destroy
       redirect_to skills_path
     end
-    def new
-      @skill = Skill.new
-      render :new
-    end
-    def create
-      @skill = Skill.new(skill_params)
-      if @skill.save
-        redirect_to  skills_path
-      else
-        render :new
-      end
-    end
+
 
   private
     def skill_params

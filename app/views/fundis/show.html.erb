@@ -36,7 +36,6 @@
   <%= @fundi.contacts%><br>
   <%= @fundi.about%><br>
 </div><hr>
-
 <%= link_to like_fundi_path(@fundi), method: :put, class: "btn btn-primary" do%>
     <span>Like</span>
     <span class="badge"><%=@fundi.get_upvotes.size%></span>
