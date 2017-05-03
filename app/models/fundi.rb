@@ -4,6 +4,7 @@ class Fundi < ActiveRecord::Base
 
   acts_as_votable
   belongs_to :skill
+  belongs_to :user
   has_many :reviews
     validates :first_name, :presence => true
     validates :surname, :presence => true
