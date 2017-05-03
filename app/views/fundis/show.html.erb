@@ -1,23 +1,63 @@
-<%= @fundi.first_name%>
-<%= @fundi.surname%>
-<%= @fundi.location%>
-<%= @fundi.contacts%>
-<%= @fundi.about%>
+<nav id="nav-top" class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "FixIt", skills_path, :class => "head-fix"%>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right sign">
+        <%if !user_signed_in?%>
+          <li class="active">
+            <%= link_to "SignUp", new_user_registration_path%>
+          </li>
+          <li>
+            <%= link_to "LogIn", new_user_session_path%>
+          </li>
+        <%end%>
+        <%if user_signed_in?%>
+          <li>
+            <%= link_to "logout", destroy_user_session_path, :method => :delete%>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container fundi-details">
+  <%= image_tag @fundi.image.url(:medium), class: "img-circle"%><br>
+  <span class="fname"><%= @fundi.first_name%></span> &nbsp
+  <span class="fname"><%= @fundi.surname%></span><br>
+  <%= @fundi.location%><br>
+  <%= @fundi.contacts%><br>
+  <%= @fundi.about%><br>
+</div><hr>
+<%= link_to like_fundi_path(@fundi), method: :put, class: "btn btn-primary" do%>
+    <span>Like</span>
+    <span class="badge"><%=@fundi.get_upvotes.size%></span>
+  <%end%>
+  <%= link_to unlike_fundi_path(@fundi), method: :put, class: "btn btn-primary" do%>
+      <span>Dislike</span>
+      <span class="badge"><%=@fundi.get_downvotes.size%></span>
+    <%end%>
 
-<% if @fundi.reviews.any? %>
+  <h2 class="gstyle text-center">Review <%= @fundi.surname%>'s work</h2>
+  <%= link_to "New review", new_fundi_review_path(@fundi), :class => "btn btn-primary fundi-btn" %><br><br>
+<div class="reviews container col-md-10">
+  <% if @fundi.reviews.any? %>
+      <ul>
+        <% @fundi.reviews.each do |review| %>
+          <div>
+            >> <span><%= review.comment%> ~~<%= review.name%></span>
+          </div>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>There are no reviews yet!</p>
+    <% end %>
 
-    <ul>
-      <% @fundi.reviews.each do |review| %>
-        <li>
-
-          <%= review.comment%> ~<%= review.name%>
-
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>There are no reviews yet!</p>
-  <% end %>
-
-  <%= link_to "New review", new_fundi_review_path(@fundi) %>
-  <p><%= link_to "Home", fundis_path %></p>
+</div>
