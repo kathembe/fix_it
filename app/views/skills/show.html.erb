@@ -43,6 +43,7 @@
     <ul>
       <% @skill.fundis.each do |fundi| %>
         <div class="thumbnail col-md-10 thumb-fundi">
+          <%= image_tag fundi.image.url(:thumb)%>
           <%= link_to fundi.first_name, fundi_path(fundi), :class => "fundi-name" %><br>
           <%= fundi.location%><br>
           <%= fundi.contacts%><br>

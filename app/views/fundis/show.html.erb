@@ -29,6 +29,7 @@
   </div>
 </nav>
 <div class="container fundi-details">
+  <%= image_tag @fundi.image.url(:medium), class: "img-circle"%><br>
   <span class="fname"><%= @fundi.first_name%></span> &nbsp
   <span class="fname"><%= @fundi.surname%></span><br>
   <%= @fundi.location%><br>

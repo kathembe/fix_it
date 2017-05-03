@@ -28,16 +28,32 @@
     </div>
   </div>
 </nav>
-<%= form_for [@skill, @fundi] do |f| %>
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-    <%= f.label :surname %>
-    <%= f.text_field :surname %>
-    <%= f.label :location %>
-    <%= f.text_field :location %>
-    <%= f.label :contacts %>
-    <%= f.text_field :contacts %>
-    <%= f.label :about %>
-    <%= f.text_area :about %>
+<%= form_for [@skill, @fundi], html: {multipart: true} do |f| %>
+<div class="field">
+  <%= f.label :Profile_pic %>
+  <%= f.file_field :image %><br>
+</div>
+<div class="field">
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %><br>
+</div>
+<div class="field">
+  <%= f.label :surname %>
+  <%= f.text_field :surname %><br>
+</div>
+<div class="field">
+  <%= f.label :location %>
+  <%= f.text_field :location %><br>
+</div>
+<div class="field">
+  <%= f.label :contacts %>
+  <%= f.text_field :contacts %><br>
+</div>
+<div class="field">
+  <%= f.label :about %>
+  <%= f.text_area :about %><br>
+</div>
+<div class="actions">
     <p><%= f.submit %></p>
-  <% end %>
+</div>
+<% end %>
