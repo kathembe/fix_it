@@ -1,0 +1,59 @@
+<nav id="nav-top" class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "FixIt", skills_path, :class => "head-fix"%>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right sign">
+        <%if !user_signed_in?%>
+          <li class="active">
+            <%= link_to "SignUp", new_user_registration_path%>
+          </li>
+          <li>
+            <%= link_to "LogIn", new_user_session_path%>
+          </li>
+        <%end%>
+        <%if user_signed_in?%>
+          <li>
+            <%= link_to "logout", destroy_user_session_path, :method => :delete%>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>
+<%= form_for [@skill, @fundi], html: {multipart: true} do |f| %>
+<div class="field">
+  <%= f.label :Profile_pic %>
+  <%= f.file_field :image %><br>
+</div>
+<div class="field">
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %><br>
+</div>
+<div class="field">
+  <%= f.label :surname %>
+  <%= f.text_field :surname %><br>
+</div>
+<div class="field">
+  <%= f.label :location %>
+  <%= f.text_field :location %><br>
+</div>
+<div class="field">
+  <%= f.label :contacts %>
+  <%= f.text_field :contacts %><br>
+</div>
+<div class="field">
+  <%= f.label :about %>
+  <%= f.text_area :about %><br>
+</div>
+<div class="actions">
+    <p><%= f.submit %></p>
+</div>
+<% end %>
